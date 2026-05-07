@@ -1,0 +1,419 @@
+/* ═══════════════════════════════════════════
+   BASE — shared across all templates
+   FIX: removed min-height:297mm from .rp base
+   FIX: use height:auto so no blank space appears
+═══════════════════════════════════════════ */
+.rp {
+  background: #fff;
+  color: #1a1a1a;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.5;
+  width: 210mm;
+  /* FIX: was min-height:297mm — caused huge empty space when content is short */
+  min-height: auto;
+  height: auto;
+  padding: 18mm 18mm;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+  /* FIX: ensure PDF page break doesn't add phantom space */
+  page-break-inside: avoid;
+  box-sizing: border-box;
+}
+.rp-text        { font-size: 9.5pt; color: #444; line-height: 1.6; margin: 0; }
+.rp-date        { font-size: 8.5pt; color: #777; white-space: nowrap; }
+.rp-bullets     { margin: 3px 0 0 14px; padding: 0; }
+.rp-bullets li  { font-size: 9.5pt; color: #444; margin-bottom: 2px; list-style-type: disc; }
+.rp-skills-wrap { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+/* FIX: sections only take space they need */
+.rp-section     { margin-bottom: 12px; }
+.rp-item        { margin-bottom: 8px; }
+.rp-item-header { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 3px; font-size: 9.5pt; }
+.rp-link        { color: #7c6aff; text-decoration: underline; font-size: inherit; word-break: break-all; }
+.rp-link:hover  { color: #5a48e0; }
+
+/* ═══════════════════════════════════════════
+   1. HARVARD STYLE — Modern Fresher (default)
+   - Serif font, centered name, all-caps sections
+   - Two-column rows (role left, date right)
+   - Full-width HR under each section title
+   - FIX: height:auto, no fixed min-height
+═══════════════════════════════════════════ */
+.rp-harvard {
+  background: #fff;
+  color: #000;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 10.5pt;
+  line-height: 1.45;
+  width: 210mm;
+  /* FIX: auto height — no blank space */
+  height: auto;
+  min-height: auto;
+  padding: 14mm 16mm 14mm 16mm;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+  box-sizing: border-box;
+}
+
+/* Header */
+.hv-header {
+  text-align: center;
+  margin-bottom: 6pt;
+  /* FIX: no fixed height */
+  height: auto;
+}
+.hv-name {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20pt;
+  font-weight: 900;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 3pt 0;
+  line-height: 1.1;
+}
+/* FIX: job title renders under name — was missing */
+.hv-job-title {
+  font-size: 10.5pt;
+  color: #333;
+  font-style: italic;
+  margin-bottom: 3pt;
+}
+.hv-contact {
+  font-size: 9pt;
+  color: #000;
+  line-height: 1.5;
+}
+.hv-contact .rp-link {
+  color: #000;
+  text-decoration: none;
+}
+.hv-sep {
+  color: #555;
+}
+
+/* Body wrapper — FIX: flex-col, auto height */
+.hv-body {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+/* Section */
+.hv-section {
+  /* FIX: margin-top only, no bottom padding that adds blank space */
+  margin-top: 7pt;
+  height: auto;
+}
+.hv-section-title {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 10.5pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: #000;
+  margin: 0 0 1pt 0;
+  /* FIX: no min-height */
+  line-height: 1.3;
+}
+/* FIX: HR sits flush — no extra margin */
+.hv-hr {
+  border: none;
+  border-top: 1.5px solid #000;
+  margin: 1pt 0 4pt 0;
+}
+
+/* Two-column row */
+.hv-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 6pt;
+  line-height: 1.4;
+  /* FIX: no fixed height */
+  height: auto;
+}
+.hv-org {
+  font-size: 10.5pt;
+  font-weight: 700;
+  color: #000;
+  margin: 0;
+}
+.hv-date {
+  font-size: 10pt;
+  color: #000;
+  white-space: nowrap;
+  flex-shrink: 0;
+  text-align: right;
+}
+.hv-italic {
+  font-style: italic;
+  font-size: 10pt;
+  color: #000;
+}
+
+/* Block = one edu / exp / proj entry */
+.hv-block {
+  /* FIX: only as tall as content */
+  margin-bottom: 6pt;
+  height: auto;
+}
+.hv-block:last-child {
+  margin-bottom: 0;
+}
+
+/* Project title line */
+.hv-proj-title {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0;
+  margin-bottom: 1pt;
+}
+.hv-proj-tech {
+  font-size: 10pt;
+  font-style: italic;
+  font-weight: 400;
+  color: #000;
+}
+
+/* Skills */
+.hv-skills-text {
+  font-size: 10pt;
+  color: #000;
+  line-height: 1.6;
+}
+
+/* Summary / Objective */
+.hv-summary {
+  font-size: 10pt;
+  color: #000;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Harvard bullet override */
+.rp-harvard .rp-bullets {
+  margin: 2pt 0 0 14pt;
+  padding: 0;
+}
+.rp-harvard .rp-bullets li {
+  font-size: 10pt;
+  color: #000;
+  margin-bottom: 1.5pt;
+  list-style-type: disc;
+  line-height: 1.4;
+}
+
+/* ═══════════════════════════════════════════
+   2. CLASSIC (Simple Clean)
+═══════════════════════════════════════════ */
+.rp-classic .rpc-header {
+  text-align: center; border-bottom: 2.5px solid #7c6aff;
+  padding-bottom: 8px; margin-bottom: 12px;
+}
+.rp-classic h1 {
+  font-family: 'Syne', sans-serif; font-size: 22pt; font-weight: 800;
+  color: #1a1a1a; margin-bottom: 3px;
+}
+.rpc-title { font-size: 11pt; color: #7c6aff; font-weight: 500; margin-bottom: 4px; }
+.rpc-contact {
+  display: flex; flex-wrap: wrap; justify-content: center;
+  gap: 8px; font-size: 8.5pt; color: #555;
+}
+.rpc-contact span::before { content: '·'; margin-right: 8px; }
+.rpc-contact span:first-child::before { content: ''; margin: 0; }
+.rp-classic .rp-section-title {
+  font-family: 'Syne', sans-serif; font-size: 9.5pt; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px; color: #7c6aff;
+  border-bottom: 1px solid #e0d9ff; padding-bottom: 3px; margin-bottom: 8px;
+}
+.rp-skill {
+  background: #f0edff; color: #5a4ec0; font-size: 8pt;
+  padding: 2px 9px; border-radius: 10px;
+}
+
+/* ═══════════════════════════════════════════
+   3. MODERN EDGE
+═══════════════════════════════════════════ */
+.rp-modern { padding: 0; }
+.rpm-header { display: flex; align-items: flex-start; }
+.rpm-accent-bar { width: 6px; background: #7c6aff; flex-shrink: 0; align-self: stretch; }
+.rpm-name-block { flex: 1; padding: 16px; background: #f7f5ff; }
+.rpm-name-block h1 {
+  font-family: 'Syne', sans-serif; font-size: 20pt; font-weight: 800;
+  color: #1a1a1a; margin-bottom: 3px;
+}
+.rpm-title { font-size: 10pt; color: #7c6aff; }
+.rpm-contact {
+  background: #7c6aff; color: #fff; padding: 16px 14px;
+  font-size: 8pt; display: flex; flex-direction: column; gap: 4px; min-width: 140px;
+}
+.rpm-contact .rp-link { color: rgba(255,255,255,0.85); }
+.rpm-section  { padding: 10px 18px; }
+.rpm-section-title {
+  font-family: 'Syne', sans-serif; font-size: 9pt; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px; color: #7c6aff; margin-bottom: 8px;
+}
+.rpm-item { display: flex; gap: 10px; margin-bottom: 10px; }
+.rpm-dot  { width: 8px; height: 8px; border-radius: 50%; background: #7c6aff; flex-shrink: 0; margin-top: 4px; }
+.rpm-item-body { flex: 1; }
+.rpm-item-header {
+  display: flex; flex-wrap: wrap; gap: 6px; align-items: baseline;
+  margin-bottom: 3px; font-size: 9.5pt;
+}
+.rpm-company { color: #666; font-size: 8.5pt; }
+.rpm-skill   { background: #7c6aff; color: #fff; font-size: 7.5pt; padding: 2px 9px; border-radius: 10px; }
+
+/* ═══════════════════════════════════════════
+   4. MINIMAL
+═══════════════════════════════════════════ */
+.rp-minimal { font-family: 'DM Sans', sans-serif; }
+.rpmn-header  { margin-bottom: 12px; }
+.rpmn-header h1 {
+  font-family: 'Syne', sans-serif; font-size: 24pt; font-weight: 800;
+  color: #111; margin-bottom: 4px;
+}
+.rpmn-title   { font-size: 11pt; color: #555; margin-bottom: 5px; }
+.rpmn-contact { font-size: 8.5pt; color: #888; }
+.rpmn-divider { border: none; border-top: 1px solid #ddd; margin: 10px 0; }
+.rpmn-section-title {
+  font-size: 7.5pt; font-weight: 700; letter-spacing: 2.5px;
+  color: #999; text-transform: uppercase; margin-bottom: 7px;
+}
+.rpmn-item    { margin-bottom: 9px; }
+.rpmn-item-top { display: flex; justify-content: space-between; align-items: baseline; }
+.rpmn-role    { font-size: 10pt; font-weight: 600; color: #1a1a1a; }
+.rpmn-date    { font-size: 8pt; color: #aaa; }
+.rpmn-company { font-size: 8.5pt; color: #777; margin-bottom: 3px; }
+.rpmn-summary { font-style: italic; color: #555; }
+
+/* ═══════════════════════════════════════════
+   5. EXECUTIVE
+═══════════════════════════════════════════ */
+.rp-executive { padding: 20mm 22mm; }
+.rpe-header   { text-align: center; margin-bottom: 18px; }
+.rpe-header h1 {
+  font-family: 'Syne', sans-serif; font-size: 26pt; font-weight: 800;
+  letter-spacing: -0.5px; color: #111; margin-bottom: 5px;
+}
+.rpe-title    { font-size: 11pt; color: #7c6aff; letter-spacing: 1px; margin-bottom: 8px; }
+.rpe-divider  { width: 60px; height: 3px; background: #7c6aff; margin: 6px auto 8px; }
+.rpe-contact  {
+  display: flex; justify-content: center; flex-wrap: wrap;
+  gap: 12px; font-size: 8.5pt; color: #666;
+}
+.rpe-section  { margin-bottom: 14px; }
+.rpe-section-title {
+  font-family: 'Syne', sans-serif; font-size: 8.5pt; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px; color: #333;
+  border-bottom: 0.5px solid #ccc; padding-bottom: 4px; margin-bottom: 9px;
+}
+.rpe-item     { margin-bottom: 9px; }
+.rpe-item-header { margin-bottom: 3px; }
+.rpe-role     { font-size: 10pt; font-weight: 700; color: #1a1a1a; }
+.rpe-company-date { font-size: 8.5pt; color: #7c6aff; font-style: italic; }
+.rpe-skills   { display: flex; flex-wrap: wrap; gap: 6px; }
+.rpe-skills span {
+  border: 0.5px solid #ccc; font-size: 8pt; padding: 2px 10px;
+  border-radius: 3px; color: #444;
+}
+
+/* ═══════════════════════════════════════════
+   6. CREATIVE GRADIENT
+═══════════════════════════════════════════ */
+.rp-creative  { padding: 0; }
+.rpct-header  {
+  background: linear-gradient(135deg, #7c6aff, #a78bfa); color: #fff;
+  padding: 16mm 18mm 12mm; display: flex;
+  justify-content: space-between; align-items: flex-end;
+}
+.rpct-name-block h1 {
+  font-family: 'Syne', sans-serif; font-size: 24pt;
+  font-weight: 800; color: #fff; margin-bottom: 4px;
+}
+.rpct-title   { font-size: 10.5pt; color: rgba(255,255,255,0.8); }
+.rpct-contact {
+  font-size: 8pt; color: rgba(255,255,255,0.85);
+  text-align: right; display: flex; flex-direction: column; gap: 3px;
+}
+.rpct-contact .rp-link { color: rgba(255,255,255,0.85); }
+.rpct-section { padding: 10px 18mm; }
+.rpct-section-label {
+  font-family: 'Syne', sans-serif; font-size: 8pt; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px; color: #7c6aff; margin-bottom: 7px;
+}
+.rpct-item    { display: flex; gap: 10px; margin-bottom: 9px; }
+.rpct-item-accent {
+  width: 3px; background: linear-gradient(180deg,#7c6aff,#c4b5fd);
+  border-radius: 2px; flex-shrink: 0;
+}
+.rpct-item-body { flex: 1; }
+.rpct-role    { font-size: 10pt; font-weight: 700; color: #1a1a1a; }
+.rpct-sub     { font-size: 8.5pt; color: #888; margin-bottom: 3px; }
+.rpct-skills  { display: flex; flex-wrap: wrap; gap: 5px; }
+.rpct-skills span {
+  background: linear-gradient(135deg,#f0edff,#e8e3ff); color: #5a4ec0;
+  font-size: 8pt; padding: 2px 10px; border-radius: 10px;
+}
+
+/* ═══════════════════════════════════════════
+   7. SIDEBAR (Two Column)
+   FIX: min-height on sidebar only, not base .rp
+═══════════════════════════════════════════ */
+.rp-sidebar {
+  display: grid;
+  grid-template-columns: 65mm 1fr;
+  /* FIX: sidebar needs min-height so left col fills */
+  min-height: 297mm;
+  padding: 0;
+  height: auto;
+}
+.rps-left   { background: #2d2354; color: #fff; padding: 16mm 12mm; }
+.rps-avatar {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg,#a78bfa,#7c6aff);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne',sans-serif; font-size: 22pt; font-weight: 800;
+  color: #fff; margin: 0 auto 10px;
+}
+.rps-name  { font-family: 'Syne',sans-serif; font-size: 12pt; font-weight: 800; color: #fff; text-align: center; }
+.rps-title { font-size: 8.5pt; color: #a78bfa; text-align: center; margin-bottom: 14px; }
+.rps-section-title {
+  font-size: 7.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+  color: #a78bfa; border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 4px; margin-bottom: 8px;
+}
+.rps-contact-item { font-size: 8pt; color: rgba(255,255,255,0.75); margin-bottom: 3px; word-break: break-all; }
+.rps-contact-item .rp-link { color: rgba(255,255,255,0.85); }
+.rps-skill-row    { margin-bottom: 5px; }
+.rps-skill-row span { font-size: 8pt; color: rgba(255,255,255,0.85); display: block; margin-bottom: 2px; }
+.rps-skill-bar    { height: 3px; background: rgba(255,255,255,0.15); border-radius: 2px; overflow: hidden; }
+.rps-skill-fill   { height: 100%; background: #a78bfa; border-radius: 2px; }
+.rps-edu-item     { margin-bottom: 8px; }
+.rps-edu-degree   { font-size: 8.5pt; font-weight: 600; color: #fff; }
+.rps-edu-school   { font-size: 8pt; color: rgba(255,255,255,0.7); }
+.rps-edu-year     { font-size: 7.5pt; color: #a78bfa; }
+.rps-right        { padding: 14mm 14mm; }
+.rps-r-section    { margin-bottom: 13px; }
+.rps-r-title      {
+  font-family: 'Syne',sans-serif; font-size: 10pt; font-weight: 700;
+  color: #2d2354; border-bottom: 2px solid #7c6aff;
+  padding-bottom: 4px; margin-bottom: 7px;
+}
+.rps-r-item       { margin-bottom: 8px; }
+.rps-r-item-head  {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: 9.5pt; margin-bottom: 2px;
+}
+.rps-r-company    { font-size: 8.5pt; color: #7c6aff; margin-bottom: 3px; }
+
+/* ─── PDF print styles ─── */
+@media print {
+  .rp, .rp-harvard {
+    box-shadow: none;
+    /* FIX: let PDF engine handle pages naturally */
+    page-break-inside: auto;
+  }
+  .hv-block, .rp-item, .hv-section {
+    page-break-inside: avoid;
+  }
+}

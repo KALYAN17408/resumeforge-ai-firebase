@@ -150,7 +150,7 @@ export default function Dashboard() {
         </Link>
         <Link to="/templates" className="quick-action">
           <div className="qa-icon">🎨</div>
-          <div className="qa-text"><strong>Browse Templates</strong><span>All 7 templates are free to use</span></div>
+          <div className="qa-text"><strong>Browse Templates</strong></div>
           <span className="qa-arrow">→</span>
         </Link>
       </div>

@@ -12,7 +12,7 @@ const FEATURES = [
 ];
 
 const STATS = [
-  { value: '7+', label: 'Resume templates' },
+  { value: 'PROFESSIONAL', label: 'Resume templates' },
   { value: '∞', label: 'Resumes allowed' },
   { value: '2 min', label: 'Setup time' },
   { value: '$0', label: 'Cost forever' },

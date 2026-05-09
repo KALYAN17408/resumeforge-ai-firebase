@@ -1,19 +1,20 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import './ResumePreview.css';
-
 export default function ResumePreview({
   data,
-  template = data.template || 'modern-fresher'
+  template = 'harvard'
 }) {
- switch (template) {
-  case 'stanford':
-    return <StanfordTemplate data={data} />;
+  console.log("Template:", data?.template);
 
-  case 'modern-fresher':
-  default:
-    return <HarvardTemplate data={data} />;
-}
+  switch (template) {
+    case 'stanford':
+      return <StanfordTemplate data={data} />;
+
+    case 'harvard':
+    default:
+      return <HarvardTemplate data={data} />;
+  }
 }
 
 /* ─────────────────────────────────────────────

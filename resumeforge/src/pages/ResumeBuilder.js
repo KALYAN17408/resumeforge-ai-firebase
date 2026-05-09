@@ -276,7 +276,8 @@ export default function ResumeBuilder() {
   onChange={e => setData(d => ({ ...d, template: e.target.value }))}
   style={{ width: 'auto', padding: '0.45rem 0.75rem', fontSize: '0.82rem' }}
 >
-  <option value="modern-fresher">Harvard Style ⭐</option>
+  <option value="harvard">Harvard Style ⭐</option>
+  <option value="stanford">Stanford Style 🎓</option>
 </select>
             <button
               className="btn btn-outline btn-sm"
@@ -701,7 +702,7 @@ export default function ResumeBuilder() {
         </div>
         <div className="bp-scroll">
           <div ref={previewRef}>
-            <ResumePreview data={data} />
+           <ResumePreview data={data} template={data.template} />
           </div>
         </div>
       </div>

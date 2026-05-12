@@ -1,309 +1,170 @@
 /* ═══════════════════════════════════════════
-   BASE — shared across all templates
+   BASE
 ═══════════════════════════════════════════ */
-
-.rp,
-.rp * {
-  box-sizing: border-box;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
 .rp {
   background: #fff;
   color: #1a1a1a;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 10.5pt;
   line-height: 1.5;
-
   width: 210mm;
-  max-width: 210mm;
-  min-height: 297mm;
-
-  padding: 18mm 18mm;
-
-  overflow-x: hidden;
-
+  height: auto;
+  min-height: auto;
   box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+  box-sizing: border-box;
+  page-break-inside: auto;
 }
-
-/* Prevent flex overflow issues */
-.hv-row,
-.rp-item-header,
-.rpmn-item-top,
-.rps-r-item-head,
-.rpm-item-header,
-.hv-proj-header {
-  min-width: 0;
-  flex-wrap: wrap;
-}
-
-/* Text containers */
-.hv-org,
-.hv-italic,
-.rp-text,
-.rpct-sub,
-.rps-r-company,
-.hv-summary,
-.hv-contact,
-.rpc-contact,
-.rpmn-contact,
-.rpe-contact,
-.rpct-contact,
-.rps-contact-item {
-  min-width: 0;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-.rp-text {
-  font-size: 9.5pt;
-  color: #444;
-  line-height: 1.6;
-}
-
-.rp-date {
-  font-size: 8.5pt;
-  color: #777;
-
-  /* FIXED */
-  white-space: normal;
-  overflow-wrap: anywhere;
-}
-
-.rp-bullets {
-  margin: 4px 0 0 14px;
-}
-
+.rp-link { color: #1a56db; text-decoration: none; word-break: break-all; }
+.rp-link:hover { text-decoration: underline; }
+.rp-bullets    { margin: 2pt 0 0 14pt; padding: 0; }
 .rp-bullets li {
-  font-size: 9.5pt;
-  color: #444;
-  margin-bottom: 2px;
-}
-
-/* ═════════ UNIVERSAL SKILLS (ALL TEMPLATES) ═════════ */
-
-.rp-skills-vertical {
-  display: flex;
-  flex-direction: column;   /* forces vertical list */
-  gap: 2px;
-  margin-top: 4px;
-}
-
-.rp-skill-item {
-  font-size: 9.5pt;
-  color: #333;
-  line-height: 1.4;
-}
-.rp-section {
-  margin-bottom: 14px;
-}
-
-.rp-item {
-  margin-bottom: 10px;
-}
-
-.rp-item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 8px;
-  margin-bottom: 3px;
-  font-size: 9.5pt;
-}
-
-.rp-link {
-  color: #7c6aff;
-  text-decoration: underline;
-  font-size: inherit;
-
-  /* FIXED */
-  overflow-wrap: anywhere;
-  word-break: break-word;
-}
-
-.rp-link:hover {
-  color: #5a48e0;
-}
-
-/* ═══════════════════════════════════════════
-   HARVARD STYLE — Modern Fresher Template
-═══════════════════════════════════════════ */
-
-.rp-harvard {
-  background: #fff;
-  color: #000;
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 10.5pt;
-  line-height: 1.4;
-
-  width: 210mm;
-  max-width: 210mm;
-  min-height: 297mm;
-
-  padding: 15mm 18mm;
-
-  overflow-x: hidden;
-
-  box-shadow: 0 4px 30px rgba(0,0,0,0.15);
-}
-
-/* Name */
-
-.hv-header {
-  text-align: center;
-  margin-bottom: 6pt;
-}
-
-.hv-name {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 20pt;
-  font-weight: 800;
-  color: #000;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 4pt;
-  line-height: 1.1;
-}
-
-.hv-contact {
-  font-size: 9pt;
-  color: #000;
-  line-height: 1.5;
-}
-
-.hv-contact a {
-  color: #000;
-  text-decoration: none;
-}
-
-/* Section */
-
-.hv-section {
-  margin-top: 8pt;
-  margin-bottom: 4pt;
-}
-
-.hv-section-title {
-  font-family: 'Times New Roman', Times, serif;
-  font-size: 10.5pt;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  color: #000;
-  margin-bottom: 1pt;
-}
-
-.hv-divider {
-  border: none;
-  border-top: 1.5px solid #000;
-  margin-bottom: 5pt;
-}
-
-/* Two-column row */
-
-.hv-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 8pt;
-  line-height: 1.4;
-}
-
-.hv-org {
-  font-size: 10.5pt;
-  font-weight: 700;
-  color: #000;
-}
-
-.hv-date {
-  font-size: 10pt;
-  color: #000;
-  flex-shrink: 0;
-  text-align: right;
-
-  /* FIXED */
-  white-space: normal;
-  overflow-wrap: anywhere;
-}
-
-.hv-italic {
-  font-style: italic;
-  font-size: 10pt;
-  color: #000;
-}
-
-/* Education item */
-
-.hv-edu-item {
-  margin-bottom: 6pt;
-}
-
-/* Experience item */
-
-.hv-exp-item {
-  margin-bottom: 8pt;
-}
-
-.hv-exp-item .rp-bullets {
-  margin-top: 3pt;
-}
-
-/* Project item */
-
-.hv-proj-item {
-  margin-bottom: 6pt;
-}
-
-.hv-proj-header {
-  display: flex;
-  align-items: baseline;
-  gap: 0;
-  flex-wrap: wrap;
-  margin-bottom: 2pt;
-}
-
-.hv-proj-tech {
-  font-size: 10pt;
-  font-style: italic;
-  color: #000;
-  font-weight: 400;
-}
-
-/* Skills block */
-
-.hv-skills-block {
-  font-size: 10pt;
-  color: #000;
-  line-height: 1.6;
-}
-
-/* Summary */
-
-.hv-summary {
-  font-size: 10pt;
-  color: #000;
-  line-height: 1.5;
-}
-
-/* Override bullet style for Harvard */
-
-.rp-harvard .rp-bullets {
-  margin: 3pt 0 0 14pt;
-  padding: 0;
-}
-
-.rp-harvard .rp-bullets li {
-  font-size: 10pt;
-  color: #000;
-  margin-bottom: 2pt;
+  font-size: 10pt; color: #000;
+  margin-bottom: 1.5pt;
   list-style-type: disc;
   line-height: 1.4;
 }
 
+/* ═══════════════════════════════════════════
+   HARVARD TEMPLATE  (default)
+   Accent: black — classic, no colour
+═══════════════════════════════════════════ */
+.hv-wrap {
+  font-family: 'Times New Roman', Times, serif;
+  color: #000;
+  padding: 13mm 16mm 14mm;
+}
+
+/* Header */
+.hv-header   { text-align: center; margin-bottom: 5pt; }
+.hv-name {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 22pt; font-weight: 900; color: #000;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin: 0 0 3pt 0; line-height: 1.1;
+}
+.hv-job-title { font-size: 10pt; color: #333; font-style: italic; margin-bottom: 3pt; }
+.hv-contact   { font-size: 9pt; color: #222; line-height: 1.5; }
+.hv-sep       { color: #555; }
+.hv-contact .rp-link { color: #000; }
+
+/* Body */
+.hv-body { display: flex; flex-direction: column; height: auto; }
+
+/* Section */
+.hv-section { margin-top: 7pt; height: auto; }
+.hv-section-title {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 10.5pt; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.3px;
+  color: #000; margin: 0 0 1pt 0; line-height: 1.3;
+}
+.hv-hr {
+  border: none;
+  border-top: 1.5px solid #000;
+  margin: 1pt 0 4pt 0;
+}
+
+/* Two-column row */
+.hv-row {
+  display: flex; justify-content: space-between;
+  align-items: baseline; gap: 6pt;
+  line-height: 1.4; height: auto;
+}
+.hv-org    { font-size: 10.5pt; font-weight: 700; color: #000; margin: 0; }
+.hv-date   { font-size: 10pt; color: #000; white-space: nowrap; flex-shrink: 0; text-align: right; }
+.hv-italic { font-style: italic; font-size: 10pt; color: #000; }
+
+/* Block */
+.hv-block          { margin-bottom: 6pt; height: auto; }
+.hv-block:last-child { margin-bottom: 0; }
+
+/* Project */
+.hv-proj-block { margin-bottom: 5pt; }
+.hv-proj-title {
+  display: flex; align-items: baseline;
+  flex-wrap: wrap; margin-bottom: 1pt;
+}
+.hv-proj-tech { font-size: 10pt; font-style: italic; color: #000; font-weight: 400; }
+
+/* Skills / Summary */
+.hv-skills-text { font-size: 10pt; color: #000; line-height: 1.6; }
+.hv-para        { font-size: 10pt; color: #000; line-height: 1.5; margin: 0; }
+
+/* ═══════════════════════════════════════════
+   STANFORD TEMPLATE
+   Accent: blue (#1a56db)
+   Name in blue, section titles in blue,
+   horizontal rules in blue
+═══════════════════════════════════════════ */
+.sf-wrap {
+  font-family: 'Times New Roman', Times, serif;
+  color: #000;
+  padding: 13mm 16mm 14mm;
+}
+
+/* Header */
+.sf-header   { text-align: center; margin-bottom: 5pt; }
+.sf-name {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 22pt; font-weight: 900;
+  /* Blue accent — key difference from Harvard */
+  color: #1a56db;
+  text-transform: uppercase; letter-spacing: 1px;
+  margin: 0 0 3pt 0; line-height: 1.1;
+}
+.sf-job-title { font-size: 10pt; color: #333; font-style: italic; margin-bottom: 3pt; }
+.sf-contact   { font-size: 9pt; color: #222; line-height: 1.5; }
+.sf-sep       { color: #555; }
+.sf-contact .rp-link { color: #1a56db; }
+
+/* Body */
+.sf-body { display: flex; flex-direction: column; height: auto; }
+
+/* Section */
+.sf-section { margin-top: 7pt; height: auto; }
+.sf-section-title {
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 10.5pt; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.3px;
+  /* Blue section titles */
+  color: #1a56db;
+  margin: 0 0 1pt 0; line-height: 1.3;
+}
+/* Blue horizontal rule */
+.sf-hr {
+  border: none;
+  border-top: 1.5px solid #1a56db;
+  margin: 1pt 0 4pt 0;
+}
+
+/* Two-column row */
+.sf-row {
+  display: flex; justify-content: space-between;
+  align-items: baseline; gap: 6pt;
+  line-height: 1.4; height: auto;
+}
+.sf-org    { font-size: 10.5pt; font-weight: 700; color: #000; margin: 0; }
+.sf-date   { font-size: 10pt; color: #000; white-space: nowrap; flex-shrink: 0; text-align: right; }
+.sf-italic { font-style: italic; font-size: 10pt; color: #000; }
+
+/* Block */
+.sf-block          { margin-bottom: 6pt; height: auto; }
+.sf-block:last-child { margin-bottom: 0; }
+
+/* Project */
+.sf-proj-block { margin-bottom: 5pt; }
+.sf-proj-title {
+  display: flex; align-items: baseline;
+  flex-wrap: wrap; margin-bottom: 1pt;
+}
+.sf-proj-tech { font-size: 10pt; font-style: italic; color: #000; font-weight: 400; }
+
+/* Skills / Summary */
+.sf-skills-text { font-size: 10pt; color: #000; line-height: 1.6; }
+.sf-para        { font-size: 10pt; color: #000; line-height: 1.5; margin: 0; }
+
+/* ─── PDF print ─── */
 @media print {
-  .rp,
-  .rp-harvard {
-    box-shadow: none;
-  }
+  .rp { box-shadow: none; page-break-inside: auto; }
+  .hv-block, .sf-block, .hv-section, .sf-section { page-break-inside: avoid; }
 }

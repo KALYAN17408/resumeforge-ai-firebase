@@ -43,7 +43,7 @@ export default function ResumeBuilder() {
 
   const [data, setData] = useState(() => {
     const params = new URLSearchParams(window.location.search);
-    return { ...EMPTY, template: params.get('template') || 'modern-fresher' };
+   return { ...EMPTY, template: params.get('template') || 'harvard' };
   });
 
   const [tab,          setTab]          = useState('personal');

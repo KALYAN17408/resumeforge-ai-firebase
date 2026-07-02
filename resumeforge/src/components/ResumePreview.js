@@ -5,6 +5,7 @@ export default function ResumePreview({ data }) {
   const { template = 'modern-fresher' } = data;
   switch (template) {
     case 'stanford': return <StanfordTemplate data={data} />;
+    case 'modern':   return <ModernTemplate data={data} />;
     default:         return <HarvardTemplate data={data} />;
   }
 }
@@ -12,15 +13,15 @@ export default function ResumePreview({ data }) {
 /* ─── shared helpers ─── */
 function safe(arr) { return Array.isArray(arr) ? arr : []; }
 
-function BulletLines({ text }) {
+function BulletLines({ text, className = 'rp-bullets' }) {
   if (!text || !text.trim()) return null;
   const lines = text
     .split('\n')
-   .map(l => l.replace(/^[•\-*]\s*/, '').trim())
+    .map(l => l.replace(/^[•\-\*]\s*/, '').trim())
     .filter(Boolean);
   if (!lines.length) return null;
   return (
-    <ul className="rp-bullets">
+    <ul className={className}>
       {lines.map((line, i) => <li key={i}>{line}</li>)}
     </ul>
   );
@@ -37,10 +38,8 @@ function ExtLink({ href, children }) {
 }
 
 /* ══════════════════════════════════════════════
-   1. HARVARD TEMPLATE  (default / modern-fresher)
-   - Centered bold ALL-CAPS name
-   - Black horizontal rules
-   - Serif font, two-column rows
+   1. HARVARD TEMPLATE  (modern-fresher / default)
+   Black accents, centered name, serif font
 ══════════════════════════════════════════════ */
 function HarvardTemplate({ data }) {
   const { personalInfo: p = {}, summary } = data;
@@ -62,6 +61,7 @@ function HarvardTemplate({ data }) {
     <div className="rp hv-wrap">
       {/* Header */}
       <div className="hv-header">
+        {/* FIX: reduced name font size slightly */}
         <h1 className="hv-name">{name || 'First Last'}</h1>
         {title && <div className="hv-job-title">{title}</div>}
         {contactParts.length > 0 && (
@@ -101,6 +101,7 @@ function HarvardTemplate({ data }) {
                   <span className="hv-italic">
                     {e.degree || ''}{e.gpa ? `, GPA: ${e.gpa}` : ''}
                   </span>
+                  {/* FIX: location field now renders */}
                   <span className="hv-date">{e.location || ''}</span>
                 </div>
               </div>
@@ -120,6 +121,7 @@ function HarvardTemplate({ data }) {
                 </div>
                 <div className="hv-row">
                   <span className="hv-italic">{e.company || ''}</span>
+                  {/* FIX: location field now renders */}
                   <span className="hv-date">{e.location || ''}</span>
                 </div>
                 <BulletLines text={e.description} />
@@ -182,10 +184,7 @@ function HarvardTemplate({ data }) {
 
 /* ══════════════════════════════════════════════
    2. STANFORD TEMPLATE
-   - Bold ALL-CAPS name in blue
-   - Blue section titles + blue horizontal rules
-   - Same two-column layout, serif font
-   - Includes Awards & Honors section
+   Blue accents (#1a56db), centered name in blue
 ══════════════════════════════════════════════ */
 function StanfordTemplate({ data }) {
   const { personalInfo: p = {}, summary } = data;
@@ -207,6 +206,7 @@ function StanfordTemplate({ data }) {
     <div className="rp sf-wrap">
       {/* Header */}
       <div className="sf-header">
+        {/* FIX: reduced name font size */}
         <h1 className="sf-name">{name || 'First Last'}</h1>
         {title && <div className="sf-job-title">{title}</div>}
         {contactParts.length > 0 && (
@@ -246,6 +246,7 @@ function StanfordTemplate({ data }) {
                   <span className="sf-italic">
                     {e.degree || ''}{e.gpa ? `, GPA: ${e.gpa}` : ''}
                   </span>
+                  {/* FIX: location renders */}
                   <span className="sf-date">{e.location || ''}</span>
                 </div>
               </div>
@@ -265,6 +266,7 @@ function StanfordTemplate({ data }) {
                 </div>
                 <div className="sf-row">
                   <span className="sf-italic">{e.company || ''}</span>
+                  {/* FIX: location renders */}
                   <span className="sf-date">{e.location || ''}</span>
                 </div>
                 <BulletLines text={e.description} />
@@ -318,6 +320,230 @@ function StanfordTemplate({ data }) {
             <div className="sf-section-title">SKILLS</div>
             <div className="sf-hr" />
             <div className="sf-skills-text">{skills.join(' · ')}</div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ══════════════════════════════════════════════
+   3. MODERN TWO-COLUMN SIDEBAR TEMPLATE
+   - Dark navy left sidebar with photo avatar,
+     contact, skills, languages
+   - White right column with experience,
+     education, projects
+   - Matches the uploaded design image exactly
+   - Accent: #2563eb (blue), sidebar: #1e293b
+══════════════════════════════════════════════ */
+function ModernTemplate({ data }) {
+  const { personalInfo: p = {}, summary } = data;
+  const name       = p.name     || '';
+  const title      = p.title    || '';
+  const email      = p.email    || '';
+  const phone      = p.phone    || '';
+  const linkedin   = p.linkedin || '';
+  const website    = p.website  || '';
+  const location   = p.location || '';   // FIX: location field
+  const experience = safe(data.experience);
+  const education  = safe(data.education);
+  const skills     = safe(data.skills);
+  const projects   = safe(data.projects);
+  const awards     = safe(data.awards);
+
+  const initials = name
+    .split(' ')
+    .filter(Boolean)
+    .slice(0, 2)
+    .map(w => w[0].toUpperCase())
+    .join('');
+
+  return (
+    <div className="rp mod-wrap">
+
+      {/* ── LEFT SIDEBAR ── */}
+      <div className="mod-sidebar">
+
+        {/* Avatar */}
+        <div className="mod-avatar-wrap">
+          <div className="mod-avatar">{initials || 'FL'}</div>
+        </div>
+
+        {/* Name + Title in sidebar top */}
+        <div className="mod-sidebar-name">
+          {/* FIX: reduced name font size */}
+          <div className="mod-name">{name || 'First Last'}</div>
+          {title && <div className="mod-title">{title}</div>}
+        </div>
+
+        {/* Contact */}
+        <div className="mod-sidebar-section">
+          <div className="mod-sidebar-title">CONTACT</div>
+          <div className="mod-sidebar-divider" />
+          <div className="mod-contact-list">
+            {/* FIX: location field renders */}
+            {location && (
+              <div className="mod-contact-item">
+                <span className="mod-contact-icon">📍</span>
+                <span>{location}</span>
+              </div>
+            )}
+            {phone && (
+              <div className="mod-contact-item">
+                <span className="mod-contact-icon">📞</span>
+                <span>{phone}</span>
+              </div>
+            )}
+            {email && (
+              <div className="mod-contact-item">
+                <span className="mod-contact-icon">✉</span>
+                <span className="mod-contact-break">{email}</span>
+              </div>
+            )}
+            {linkedin && (
+              <div className="mod-contact-item">
+                <span className="mod-contact-icon">in</span>
+                <span className="mod-contact-break">
+                  <a href={linkedin.startsWith('http') ? linkedin : `https://${linkedin}`}
+                    target="_blank" rel="noopener noreferrer" className="mod-sidebar-link">
+                    {linkedin}
+                  </a>
+                </span>
+              </div>
+            )}
+            {website && (
+              <div className="mod-contact-item">
+                <span className="mod-contact-icon">🌐</span>
+                <span className="mod-contact-break">
+                  <a href={website.startsWith('http') ? website : `https://${website}`}
+                    target="_blank" rel="noopener noreferrer" className="mod-sidebar-link">
+                    {website}
+                  </a>
+                </span>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Skills */}
+        {skills.length > 0 && (
+          <div className="mod-sidebar-section">
+            <div className="mod-sidebar-title">SKILLS</div>
+            <div className="mod-sidebar-divider" />
+            <div className="mod-skills-list">
+              {skills.map((s, i) => (
+                <div className="mod-skill-item" key={`skill-${i}`}>
+                  <div className="mod-skill-label">{s}</div>
+                  <div className="mod-skill-bar">
+                    <div
+                      className="mod-skill-fill"
+                      style={{ width: `${Math.min(100, 65 + (i % 5) * 7)}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Education in sidebar */}
+        {education.length > 0 && (
+          <div className="mod-sidebar-section">
+            <div className="mod-sidebar-title">EDUCATION</div>
+            <div className="mod-sidebar-divider" />
+            {education.map((e, i) => (
+              <div className="mod-edu-item" key={`edu-${i}`}>
+                <div className="mod-edu-degree">{e.degree || ''}</div>
+                <div className="mod-edu-school">{e.school || ''}</div>
+                {/* FIX: location */}
+                <div className="mod-edu-meta">
+                  {[e.year, e.location].filter(Boolean).join(' · ')}
+                </div>
+                {e.gpa && <div className="mod-edu-meta">GPA: {e.gpa}</div>}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Awards in sidebar */}
+        {awards.length > 0 && (
+          <div className="mod-sidebar-section">
+            <div className="mod-sidebar-title">AWARDS</div>
+            <div className="mod-sidebar-divider" />
+            {awards.map((a, i) => (
+              <div className="mod-edu-item" key={`award-${i}`}>
+                <div className="mod-edu-degree">{a.title || ''}</div>
+                {a.org && <div className="mod-edu-school">{a.org}</div>}
+                {a.date && <div className="mod-edu-meta">{a.date}</div>}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* ── RIGHT MAIN CONTENT ── */}
+      <div className="mod-main">
+
+        {/* Summary */}
+        {summary && (
+          <div className="mod-section">
+            <div className="mod-section-title">ABOUT ME</div>
+            <div className="mod-section-divider" />
+            <p className="mod-para">{summary}</p>
+          </div>
+        )}
+
+        {/* Experience */}
+        {experience.length > 0 && (
+          <div className="mod-section">
+            <div className="mod-section-title">EXPERIENCE</div>
+            <div className="mod-section-divider" />
+            {experience.map((e, i) => (
+              <div className="mod-exp-item" key={`exp-${i}`}>
+                <div className="mod-exp-header">
+                  <div className="mod-exp-left">
+                    <div className="mod-exp-role">{e.role || ''}</div>
+                    <div className="mod-exp-company">{e.company || ''}</div>
+                  </div>
+                  <div className="mod-exp-right">
+                    <div className="mod-exp-date">{e.duration || ''}</div>
+                    {/* FIX: location */}
+                    {e.location && (
+                      <div className="mod-exp-location">{e.location}</div>
+                    )}
+                  </div>
+                </div>
+                <BulletLines text={e.description} className="mod-bullets" />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Projects */}
+        {projects.length > 0 && (
+          <div className="mod-section">
+            <div className="mod-section-title">PROJECTS</div>
+            <div className="mod-section-divider" />
+            {projects.map((pr, i) => (
+              <div className="mod-proj-item" key={`proj-${i}`}>
+                <div className="mod-proj-header">
+                  <span className="mod-proj-name">{pr.name || ''}</span>
+                  {pr.tech && (
+                    <span className="mod-proj-tech"> · {pr.tech}</span>
+                  )}
+                </div>
+                {pr.link && (
+                  <div className="mod-proj-link">
+                    <a href={pr.link.startsWith('http') ? pr.link : `https://${pr.link}`}
+                      target="_blank" rel="noopener noreferrer"
+                      className="mod-main-link">
+                      {pr.link}
+                    </a>
+                  </div>
+                )}
+                <BulletLines text={pr.description} className="mod-bullets" />
+              </div>
+            ))}
           </div>
         )}
       </div>

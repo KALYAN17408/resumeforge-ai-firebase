@@ -16,7 +16,7 @@ const EMPTY = {
   education:  [],
   skills:     [],
   projects:   [],
-  template:   'modern-fresher',
+  template:   'harvard',
 };
 
 function useDebounce(value, delay) {
@@ -43,7 +43,7 @@ export default function ResumeBuilder() {
 
   const [data, setData] = useState(() => {
     const params = new URLSearchParams(window.location.search);
-   return { ...EMPTY, template: params.get('template') || 'harvard' };
+   return { ...EMPTY, template: params.get('template') || 'harvard' };  
   });
 
   const [tab,          setTab]          = useState('personal');
@@ -163,12 +163,33 @@ export default function ResumeBuilder() {
       const filename = (data.personalInfo?.name || 'resume')
         .replace(/[^a-z0-9]/gi, '_');
       await html2pdf().set({
-        margin:      0,
-        filename:    `${filename}.pdf`,
-        image:       { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, logging: false },
-        jsPDF:       { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      }).from(el).save();
+  margin: [0, 0, 0, 0],
+
+  filename: `${filename}.pdf`,
+
+  image: {
+    type: 'jpeg',
+    quality: 1
+  },
+
+  html2canvas: {
+    scale: 3,
+    useCORS: true,
+    logging: false,
+    letterRendering: true,
+    scrollY: 0
+  },
+
+  jsPDF: {
+    unit: 'mm',
+    format: 'a4',
+    orientation: 'portrait'
+  },
+
+  pagebreak: {
+    mode: ['avoid-all', 'css', 'legacy']
+  }
+}).from(el).save();
       showToast('PDF downloaded!');
     } catch (err) {
       console.error('exportPDF:', err);
@@ -277,7 +298,8 @@ export default function ResumeBuilder() {
   style={{ width: 'auto', padding: '0.45rem 0.75rem', fontSize: '0.82rem' }}
 >
   <option value="harvard">Harvard Style ⭐</option>
-  <option value="stanford">Stanford Style 🎓</option>
+  <option value="stanford">Stanford Style 🔵</option>
+  <option value="modern">Modern Sidebar 🎨</option>
 </select>
             <button
               className="btn btn-outline btn-sm"
@@ -701,9 +723,9 @@ export default function ResumeBuilder() {
           </span>
         </div>
         <div className="bp-scroll">
-          <div ref={previewRef}>
-           <ResumePreview data={data} template={data.template} />
-          </div>
+          <div ref={previewRef} className="resume-preview-page">
+  <ResumePreview data={data} template={data.template} />
+</div>
         </div>
       </div>
     </div>

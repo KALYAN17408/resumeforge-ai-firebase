@@ -17,7 +17,7 @@ function BulletLines({ text, className = 'rp-bullets' }) {
   if (!text || !text.trim()) return null;
   const lines = text
     .split('\n')
-    .map(l => l.replace(/^[•\-\*]\s*/, '').trim())
+    .map(l => l.replace(/^[•\-*]\s*/, '').trim())
     .filter(Boolean);
   if (!lines.length) return null;
   return (
